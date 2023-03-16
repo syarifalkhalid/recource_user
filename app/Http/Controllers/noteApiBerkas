@@ -1,0 +1,155 @@
+$response = $client->request('POST', 'https://genbi-ntb.com/api/berkas', [
+        'headers' => [
+            'Authorization' => 'Bearer ' . session('api_token')
+        ]
+        ],
+    
+    
+    )->attach(
+        'foto', // nama parameter file pada API
+        $request->file('foto')->getRealPath(),
+        $request->file('foto')->getClientOriginalName()
+    )->attach(
+        'ktp', // nama parameter file pada API
+        $request->file('ktp')->getRealPath(),
+        $request->file('ktp')->getClientOriginalName()
+    )->attach(
+        'kk', // nama parameter file pada API
+        $request->file('kk')->getRealPath(),
+        $request->file('kk')->getClientOriginalName()
+    )->attach(
+        'sktm', // nama parameter file pada API
+        $request->file('sktm')->getRealPath(),
+        $request->file('sktm')->getClientOriginalName()
+    )->attach(
+        'suket_beasiswa', // nama parameter file pada API
+        $request->file('suket_beasiswa')->getRealPath(),
+        $request->file('suket_beasiswa')->getClientOriginalName()
+    )->attach(
+        'suket_pernyataan_tidak_menerima_beasiswa', // nama parameter file pada API
+        $request->file('suket_pernyataan_tidak_menerima_beasiswa')->getRealPath(),
+        $request->file('suket_pernyataan_tidak_menerima_beasiswa')->getClientOriginalName()
+    )->attach(
+        'suket_pernyataan_berperan_aktif', // nama parameter file pada API
+        $request->file('suket_pernyataan_berperan_aktif')->getRealPath(),
+        $request->file('suket_pernyataan_berperan_aktif')->getClientOriginalName()
+    )->attach(
+        'transkip', // nama parameter file pada API
+        $request->file('transkip')->getRealPath(),
+        $request->file('transkip')->getClientOriginalName()
+    )->attach(
+        'form_a1', // nama parameter file pada API
+        $request->file('form_a1')->getRealPath(),
+        $request->file('form_a1')->getClientOriginalName()
+    )->attach(
+        'sertifikat', // nama parameter file pada API
+        $request->file('sertifikat')->getRealPath(),
+        $request->file('sertifikat')->getClientOriginalName()
+    )->attach(
+        'motivation_later', // nama parameter file pada API
+        $request->file('motivation_later')->getRealPath(),
+        $request->file('motivation_later')->getClientOriginalName()
+    )->attach(
+        'bukti_transaksi_qris', // nama parameter file pada API
+        $request->file('bukti_transaksi_qris')->getRealPath(),
+        $request->file('bukti_transaksi_qris')->getClientOriginalName()
+    );
+    $message = [
+        [
+            'name' => 'nama',
+            'contents' => $request->input('nama'),
+        ],
+        [
+            'name' => 'nim',
+            'contents' => $request->input('nim'),
+        ],
+        [
+            'name' => 'universitas',
+            'contents' => $request->input('universitas'),
+        ],
+        [
+            'name' => 'prodi',
+            'contents' => $request->input('prodi'),
+        ],
+        [
+            'name' => 'semester',
+            'contents' => $request->input('semester'),
+        ],
+        [
+            'name' => 'alamat',
+            'contents' => $request->input('alamat'),
+        ],
+        [
+            'name' => 'tgl_lahir',
+            'contents' => $request->input('tgl_lahir'),
+        ],
+        [
+            'name' => 'tmp_lahir',
+            'contents' => $request->input('tmp_lahir'),
+        ],
+        [
+            'name' => 'ayah',
+            'contents' => $request->input('ayah'),
+        ],
+        [
+            'name' => 'pekerjaan_ayah',
+            'contents' => $request->input('pekerjaan_ayah'),
+        ],
+        [
+            'name' => 'ibu',
+            'contents' => $request->input('ibu'),
+        ],
+        [
+            'name' => 'pekerjaan_ibu',
+            'contents' => $request->input('pekerjaan_ibu'),
+        ],
+        [
+            'name' => 'saudara',
+            'contents' => $request->input('saudara'),
+        ],
+    ];
+    
+    foreach ($request->allFiles() as $key => $file) {
+        $message[] = [
+            'name' => $key,
+            'contents' => fopen($file->getPathname(), 'r'),
+            'filename' => $file->getClientOriginalName(),
+        ];
+    }
+    
+    $response = $client->request('POST', 'https://genbi-ntb.com/api/berkas', [
+        'headers' => [
+            'Authorization' => 'Bearer ' . session('api_token')
+        ],
+        'multipart' => $message,
+    ]);
+    
+    // ->post('https://genbi-ntb.com/api/berkas', [
+
+    //         'nama' => $request->input('nama'),
+    //         'nim' => $request->input('nim'),
+    //         'universitas' => $request->input('universitas') ,
+    //         'prodi' => $request->input('prodi'),
+    //         'semester' => $request->input('semester'),
+    //         'alamat' => $request->input('alamat'),
+    //         'tgl_lahir' => $request->input('tgl_lahir'),
+    //         'tmp_lahir' => $request->input('tmp_lahir'),
+    //         'ayah' => $request->input('ayah'),
+    //         'pekerjaan_ayah' => $request->input('pekerjaan_ayah'),
+    //         'ibu' => $request->input('ibu'),
+    //         'pekerjaan_ibu' => $request->input('pekerjaan_ayah'),
+    //         'saudara' => $request->input('saudara'),
+    //         // 'foto' => $request->input('foto'),
+    //         // 'ktp' => $request->input('ktp'),
+    //         // 'kk' => $request->input('kk'),
+    //         // 'sktm' => $request->input('sktm'),
+    //         // 'suket_beasiswa' =>$request->input('suket_beasiswa'),
+    //         // 'suket_pernyataan_tidak_menerima_beasiswa' =>$request->input('suket_pernyataan_tidak_menerima_beasiswa'),
+    //         // 'suket_pernyataan_berperan_aktif' =>$request->input('suket_pernyataan_berperan_aktif'),
+            
+    //         // 'transkip' => $request->input('transkip'),
+    //         // 'form_a1' => $request->input('form_a1'),
+    //         // 'sertifikat' => $request->input('sertifikat'),
+    //         // 'motivation_later' => $request->input('motivation_later'),
+    //         // 'bukti_transaksi_qris' => $request->input('bukti_transaksi_qris'),
+    // ]);
