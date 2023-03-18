@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+    Detail Pengumuman | GenBi
+@endsection
+
 @section('content')
     <section class="section col-8">
         <div class="row" id="basic-table">
@@ -11,7 +15,7 @@
                     <div class="card-content">
                         <div class="card-body">
                             <!-- Table with outer spacing -->
-                            <div class="table-responsive">
+                            <div class="table-responsive" style="text-align: justify">
                                 <table class="table table-lg">
                                     <tr>
                                         <th>Judul</th>
@@ -22,10 +26,13 @@
                                         <th>Deskripsi</th>
                                         <th style="">{{ $data['deskripsi'] }}</th>
                                     </tr>
-                                    <th>File Pengumuman </th>
-                                    <th>
-                                        <a href="{{ route('pengumumanDownload', $data['id'] ) }}" target="_blank"
-                                            style="">Download</a>
+                                    {{-- <th>File Pengumuman </th> --}}
+                                    {{-- <th>
+                                        <iframe src="{{ asset('https://genbi-ntb.com/api/pdf/' . $data['file_pdf']) }}"
+                                            width="100%" height="600px"></iframe>
+
+                                        {{-- <a href="{{ route('pengumumanDownload', $data['file_pdf']) }}" target="_blank"
+                                            style="">Download</a> --}}
                                     </th>
                                 </table>
                             </div>

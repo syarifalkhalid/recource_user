@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Mazer Admin Dashboard</title>
+    <title>@yield('title')</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
@@ -27,7 +27,7 @@
                         <div class="auth-logo">
                             <a href="index.html"><img
                                     src="https://www.generasibaruindonesia.com/asset_easy/images_easy/genbi/logogenbild.jpg?asad"
-                                    style="width: 80%; height: 80%;" alt="Logo-genbi"></a>
+                                    style="width: 80%; height: 88%;" alt="Logo-genbi"></a>
                         </div>
                         <div class="toggler">
                             <a href="#" class="sidebar-hide d-xl-none d-block"><i
@@ -51,7 +51,7 @@
             </header>
 
             <div class="page-heading">
-                <h3>Website Pendaftaran Beasiswa</h3>
+                <h3>Website Pendaftaran Beasiswa BI</h3>
             </div>
             @yield('content')
 

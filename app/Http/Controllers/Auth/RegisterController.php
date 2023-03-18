@@ -25,6 +25,7 @@ class RegisterController extends Controller
     // dd($request);
 
     if ($response->status() == 201) {
+        session(['register_success' => true]);
         return redirect()->route('login')->with('success', 'Your account has been created. Please login to continue.');
     } else {
         return back()->withInput()->withErrors($response->json());

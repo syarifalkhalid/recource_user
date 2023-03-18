@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+    Pegumuman | GenBi
+@endsection
+
 @section('content')
     <section class="section">
         <div class="row" id="basic-table">

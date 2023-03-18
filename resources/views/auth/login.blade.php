@@ -25,7 +25,15 @@
                     </div>
                     <h4 class="auth-title">Log in.</h4>
                     {{-- <p class="auth-subtitle mb-5">Log in untuk melanjutkan mengisi berkas pendaftaran</p> --}}
-
+                    @if (session('register_success'))
+                    <div class="alert alert-success">
+                        Register Berhasil
+                    </div>
+                    {{-- @elseif(session('error_login'))
+                    <div class="alert alert-danger">
+                        Gagal Login
+                    </div> --}}
+                @endif
                     <form action="{{ route('loginSubmit') }}" method="POST">
                         @csrf
                         <div class="form-group position-relative has-icon-left mb-4">

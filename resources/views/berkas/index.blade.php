@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
+@section('title')
+    Upload Berkas | GenBi
+@endsection
+
 @section('content')
     <section id="multiple-column-form">
         <div class="row match-height">
@@ -8,6 +12,11 @@
                     <div class="card-header">
                         <h4 class="card-title">Submit Berkas Pendaftaran</h4>
                     </div>
+                    @if (session('form_submitted'))
+                        <div class="alert alert-success">
+                            Form sudah di-submit !!
+                        </div>
+                    @endif
                     <form action="{{ route('berkasSubmit') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
@@ -116,7 +125,7 @@
                                                 <div class="form-group">
                                                     <label for="jenis_kelamin">Jenis Kelamin</label>
                                                     <fieldset class="form-group">
-                                                        <select class="form-select" id="basicSelect">
+                                                        <select class="form-select" name="jenis_kelamin" id="basicSelect">
                                                             <option value="Laki-Laki">Laki-Laki</option>
                                                             <option value="Perempuan">Perempuan</option>
                                                         </select>
@@ -132,7 +141,7 @@
                                                 <div class="form-group">
                                                     <label for="agama">Agama</label>
                                                     <fieldset class="form-group">
-                                                        <select class="form-select" id="basicSelect">
+                                                        <select class="form-select" name="agama" id="basicSelect">
                                                             <option value="Islam">Islam</option>
                                                             <option value="Kristen">Kristen</option>
                                                             <option value="Hindu">Hindu</option>
@@ -229,7 +238,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="form-group">
-                                            <h5 class="text-primary">Berkas Dalam Bentuk Gambar</h5>
+                                            <h5 class="text-primary">Upload Berkas Gambar</h5>
                                             <label>Pas Foto</label>
 
                                             <div class="input-group">
@@ -245,6 +254,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>KTP</label>
@@ -262,6 +272,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>KTM/Suket Aktif Kuliah</label>
@@ -279,6 +290,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
 
                                         <div class="form-group">
@@ -298,7 +310,9 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
+                                        
                                         <div class="form-group">
                                             <label>Surat Tidak Sedang Mendapat Beasiswa/Bekerja</label>
                                             <div class="input-group">
@@ -317,6 +331,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Surat Berperan AKtif GenBI</label>
@@ -336,6 +351,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>SKTM/Slip Gaji</label>
@@ -353,9 +369,10 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1 MB</span>
                                         </div>
                                         <div class="form-group mt-4 ">
-                                            <h5 class="text-primary">Berkas Dalam Bentuk PDF</h5>
+                                            <h5 class="text-primary">Upload Berkas PDF</h5>
                                             <label>Form A1</label>
                                             <div class="input-group">
                                                 <input type="file"
@@ -371,6 +388,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1.5 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Bukti Transaksi Qris & Link Video Edukasi</label>
@@ -389,6 +407,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 1.5 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Transkip Nilai </label>
@@ -406,6 +425,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 2 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Piagam Sertifikat </label>
@@ -424,6 +444,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 2 MB</span>
                                         </div>
                                         <div class="form-group">
                                             <label>Motivation Later</label>
@@ -442,6 +463,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
+                                            <span class="text-danger" style="font-size: 12px">Max 2 MB</span>
                                         </div>
                                     </div>
                                 </div>

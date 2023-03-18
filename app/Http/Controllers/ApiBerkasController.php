@@ -18,8 +18,10 @@ class ApiBerkasController extends Controller
 
     public function berkas(Request $request)
 {
+    // dd($request);
     ini_set('max_execution_time', 300); // 300 seconds = 5 minutes
 
+    
     // Ambil file dari request
     $file1 = $request->file('foto');
     $file2 = $request->file('ktp');
@@ -62,11 +64,13 @@ class ApiBerkasController extends Controller
     $file11->storeAs('uploads', $fileNameMotivation_later, 'public');
     $file12->storeAs('uploads', $fileNameBukti_transaksi_qris, 'public');
    
+
     $client = new Client();
     
-    $response = $client->request('POST', 'https://genbi-ntb.com/api/berkas', [
+    $response = $client->request('post', 'https://genbi-ntb.com/api/berkas', [
         'headers' => [
-            'Authorization' => 'Bearer ' . session('api_token')
+            'Authorization' => 'Bearer ' . session('api_token'),
+            'Accept' => 'application/json',
         ],
         'multipart' => [
             [
@@ -100,6 +104,14 @@ class ApiBerkasController extends Controller
             [
                 'name' => 'tmp_lahir',
                 'contents' => $request->input('tmp_lahir'),
+            ],
+            [
+                'name' => 'jenis_kelamin',
+                'contents' => $request->input('jenis_kelamin'),
+            ],
+            [
+                'name' => 'agama',
+                'contents' => $request->input('agama'),
             ],
             [
                 'name' => 'ayah',
@@ -183,14 +195,17 @@ class ApiBerkasController extends Controller
             ],
         ]
     ]);
-
-    return $response;
-    if ($response->status() == 200) {
-       
-        return redirect('berkas')->with('success', 'You have successfully.');
-    } else {
-        return back()->withInput()->withErrors($response->json());
-    }
+    
+    // $result = $response->getBody()->getContents();
+    
+    // dd($response);
+if ($response->getStatusCode() == 200) {
+    // respons berhasil diterima
+    $responseBody = $response->getBody();
+    session(['form_submitted' => true]);
+}
+    return redirect()->route('showBerkas')->with('success', 'You have successfully.');
+  
     
 }
 }

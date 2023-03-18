@@ -20,9 +20,10 @@ public function login(Request $request)
         'password' => $request->input('password'),
     ]);
         // return $response;
-
-    if ($response->status() == 200) {
-        // session(['api_token' => $response['access_token']]);
+    
+        
+    if ($response->status() == 200 && isset($response['token'])) {
+        // session(['api_token' => $response['access_token']]);   
         $token = $response['token'];
         session(['api_token' => $token]);
         $request->session()->regenerate();
@@ -41,7 +42,7 @@ public function logout(Request $request)
     if ($response->status() == 200) {
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect('login')->with('success', 'You have successfully logged out.');
+        return redirect('/')->with('success', 'You have successfully logged out.');
     } else {
         return back()->withInput()->withErrors($response->json());
     }
